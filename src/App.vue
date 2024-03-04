@@ -1,92 +1,48 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="nav mb-3">
+      <button @click="decIndexPage">prev</button>
+      <button @click="incIndexPage">next</button>
+    </div>
+    
+    <button-component v-if="indexPage === 1"></button-component>
 
-  <h1 v-show="isDirectives">Тема урока: Directives</h1>
-  <h1 v-show="!isDirectives">Тема урока: {{title}}</h1>
+    <circle-component v-else-if="indexPage === 2"></circle-component>
 
-  <ul>
-    <list-item
-    v-for="post in posts"
-    :key="post.id"
-    :text="post.text" 
-    :icon="post.icon" 
-    >
-    <template v-slot:pretext>
-      <span>Some Text</span>
-    </template>
-      <span>Some Text</span>
-    </list-item>
+    <to-do-component v-else-if="indexPage === 3"></to-do-component>
 
-  </ul>
-
-  <span class="total">Всего строк: {{ totalCount }}</span>
+    <form-component v-else></form-component>
   </div>
-
 </template>
 
 <script>
-import ListItem from '@/components/ListItem.vue'
-import { v4 as uuidv4 } from 'uuid';
+import ButtonComponent from '@/components/ButtonComponent'
+import CircleComponent from '@/components/CircleComponent'
+import ToDoComponent from './components/ToDoComponent'
+import FormComponent from '@/components/FormComponent'
+
 export default {
-  components: {ListItem},
+  components: {ButtonComponent, CircleComponent, ToDoComponent, FormComponent},
   data() {
     return {
-      title: 'Props',
-      isDirectives: true,
-      posts: [
-        {
-          id: uuidv4(),
-          text: "Текст первый",
-          icon: "setting.png",
-          cheked: true,
-        },
-        {
-          id: uuidv4(),
-          text: "Текст второй",
-          icon: "user.png",
-          cheked: true,
-        },
-        {
-          id: uuidv4(),
-          text: "Текст третий",
-          icon: "phone.png",
-          cheked: true,
-        },
-      ]
+      indexPage: 2
     }
   },
-  computed: {
-    totalCount() {
-      return this.posts.length + 'шт'
+  methods: {
+    incIndexPage() {
+      if(this.indexPage === 4){
+        this.indexPage = 1
+      } else {
+        this.indexPage++
+      }
+    },
+    decIndexPage() {
+      if(this.indexPage === 1){
+        this.indexPage = 4
+      } else {
+        this.indexPage--
+      }
     }
   }
 }
 </script>
-
-<style lang="scss" scooped>
-  ul {
-  list-style: none;
-
-  li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    img {
-      margin-right: 10px;
-    }
-
-    &:hover {
-      color: red;
-    }
-
-    &.checked {
-      color: red;
-    }
-  }
-}
-
-.total {
-  padding-left: 40px;
-}
-</style>
