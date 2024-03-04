@@ -1,23 +1,23 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-// import FirstPage from '../views/FirstPage'
-// import SecondPage from '../views/SecondPage'
+import FirstView from '../views/FirstView'
+import SecondView from '../views/SecondView'
 
-// Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-// const router = new VueRouter({
-//     mode: 'history',
-//     routes: [
-//       {
-//         path: '/',
-//         component: FirstPage
-//       },
-//       {
-//         path: '/second',
-//         component: SecondPage
-//       },
-//     ]
-//   })
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            component: FirstView
+        },
+        {
+            path: '/second',
+            component: SecondView
+        }
+    ]
+})
 
-//   export default router
+export default router
