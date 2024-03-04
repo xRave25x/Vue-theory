@@ -10,23 +10,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Ivan</td>
-            <td>31</td>
-            <td>Designer</td>
-          </tr>
-          <tr>
-            <td>Vlad</td>
-            <td>38</td>
-            <td>Designer</td>
-          </tr>
-          <tr>
-            <td>Nikita</td>
-            <td>28</td>
-            <td>Designer</td>
+          <tr v-for="designer in designers" :key="designer.id">
+            <td>{{designer.name}}</td>
+            <td>{{designer.age}}</td>
+            <td>{{designer.role}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 </template>
+
+<script>
+
+export default {
+  computed: {
+    designers() {
+      return this.$store.getters['getDesigners']
+    }
+  }
+}
+  
+</script>
